@@ -197,7 +197,7 @@
           } else {
             playButton.remove();
           }
-          drooshiLastMoved = Date.now(); /*The last time the drooshi moved*/
+          var drooshiLastMoved = Date.now(); /*The last time the drooshi moved*/
 
           requestAnimationFrame(function moveDrooshi(){
             if (drooshiIsMoving && ((Date.now()-drooshiLastMoved) >= 125)) {
