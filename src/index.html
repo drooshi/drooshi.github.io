@@ -197,13 +197,16 @@
           } else {
             playButton.remove();
           }
-          setInterval(function () {
-            if (!drooshiIsMoving) {
-              return;
+          drooshiLastMoved = Date.now(); /*The last time the drooshi moved*/
+
+          requestAnimationFrame(function moveDrooshi(){
+            if (drooshiIsMoving && ((Date.now()-drooshiLastMoved) >= 125)) {
+              img.style.transform = img.style.webkitTransform = "translate(" + (j + offset).toString() + "px, 0px)";
+              i < sequence.length ? (j += sequence[i] * scale, i++) : (i = 0, j = 0);
+              drooshiLastMoved = Date.now() /*Reset current*/
             }
-            img.style.transform = img.style.webkitTransform = "translate(" + (j + offset).toString() + "px, 0px)";
-            i < sequence.length ? (j += sequence[i] * scale, i++) : (i = 0, j = 0);
-          }, timing);
+            requestAnimationFrame(moveDrooshi);
+          });
         };
 
         selectDrooshiLink.addEventListener("click", function (ev) {
