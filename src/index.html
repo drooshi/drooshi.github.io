@@ -162,7 +162,7 @@
           music.play();
           drooshiContainer.style.display = "block";
           drooshiSelect.style.display = "none";
-
+          drooshiIsMoving = true;
           ga("send", "event", "drooshi", "select", "choose drooshi", s);
 
         }
@@ -212,6 +212,7 @@
           music.currentTime = 0;
           drooshiSelect.style.display = "block";
           body.classList.remove("nc");
+          drooshiIsMoving = false;
         }, false);
 
         drooshify(drooshi, 20, 125, -40);
