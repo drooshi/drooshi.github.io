@@ -136,44 +136,6 @@
       ga('create', 'UA-64077979-1', 'auto');
       ga('send', 'pageview');
 
-      //Query only when loaded
-      /*addEventListener("DOMContentLoaded", function() {
-        var e = document.getElementById("drooshi-mt"),
-          t = document.getElementsByClassName("drooshi-options"),
-          n = document.getElementById("body"),
-          s = document.getElementById("drooshi-select-link"),
-          o = document.getElementById("drooshi-music"),
-          c = document.getElementById("drooshi-container"),
-          i = document.getElementById("drooshi-select"),
-          a = document.getElementById("drooshi"),
-          d = !0,
-          l = function(t, n, s) {
-            e.textContent = t, o.src = n, o.play(), c.style.display = "block", i.style.display = "none", ga("send", "event", "link", "click", "choose drooshi", s)
-          };
-        t[0].addEventListener("click", function() {
-          l("NUMA DROOSHI!!!", "assets/romanian.mp3", 0)
-        }), t[1].addEventListener("click", function() {
-          l("ENGLISH DROOSHI!!!", "assets/english.mp3", 1)
-        }), t[2].addEventListener("click", function() {
-          n.classList.add("nc"), l("NIGHTCORE DROOSHI!!!", "assets/nightcore.mp3", 2)
-        });
-        var r = function(e, t, n, s) {
-          s = s ? s : 0;
-          var o = 0,
-            c = 0,
-            i = [1, 1, 1, 1, 0, -1, -1, 1, -1];
-          setInterval(function() {
-            d && (e.style.transform = e.style.webkitTransform = "translateX(" + (c + s).toString() + "px)", o < i.length ? (c += i[o] * t, o++) : (o = 0, c = 0))
-          }, n)
-        };
-        s.addEventListener("click", function() {
-          c.style.display = "none", o.pause(), o.currentTime = 0, i.style.display = "block", n.classList.remove("nc");
-          ga("send", "event", "drooshi", "browse", "browse drooshi");
-        }, !1), r(a, 20, 125, -40)
-      }, !1);*/
-
-
-
       addEventListener("DOMContentLoaded", function () {
         var getElementById = function(e){
           return document.getElementById(e);
