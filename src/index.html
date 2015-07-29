@@ -54,6 +54,11 @@
         will-change: transform;
       }
 
+      #drooshi-time {
+        font-size: 1.1em;
+        margin-top: 0.2em;
+      }
+
       .drooshi-options {
         width: 640px;
         height: 254px;
@@ -153,8 +158,10 @@
         var drooshiContainer = getElementById("drooshi-container");
         var drooshiSelect = getElementById("drooshi-select");
         var drooshi = getElementById("drooshi");
+        var drooshiTimeDisplay = getElementById("drooshi-time-display");
 
         var drooshiIsMoving = true;
+        var drooshiStartTime = Date.now(); /*Used for drooshi timer*/
 
         var defaultState = function (titleText, musicUrl) {
           mainTitle.textContent = titleText;
@@ -163,6 +170,7 @@
           drooshiContainer.style.display = "block";
           drooshiSelect.style.display = "none";
           drooshiIsMoving = true;
+          drooshiStartTime = Date.now();
           ga("send", "event", "drooshi", "select", "choose drooshi", s);
 
         }
@@ -200,10 +208,14 @@
           var drooshiLastMoved = Date.now(); /*The last time the drooshi moved*/
 
           requestAnimationFrame(function moveDrooshi(){
-            if (drooshiIsMoving && ((Date.now()-drooshiLastMoved) >= 125)) {
-              img.style.transform = img.style.webkitTransform = "translate(" + (j + offset).toString() + "px, 0px)";
-              i < sequence.length ? (j += sequence[i] * scale, i++) : (i = 0, j = 0);
-              drooshiLastMoved = Date.now() /*Reset current*/
+            if (drooshiIsMoving === true) {
+              var now = Date.now();
+              if ((now-drooshiLastMoved) >= 125) {
+                img.style.transform = img.style.webkitTransform = "translate(" + (j + offset).toString() + "px, 0px)";
+                i < sequence.length ? (j += sequence[i] * scale, i++) : (i = 0, j = 0);
+                drooshiLastMoved = Date.now() /*Reset current*/
+              }
+              drooshiTimeDisplay.textContent = ((now - drooshiStartTime)/1000).toFixed(1);
             }
             requestAnimationFrame(moveDrooshi);
           });
@@ -234,6 +246,7 @@
       <div id="drooshi-box">
         <img src="assets/drooshi.png" alt="drooshi.tk" id="drooshi">
       </div>
+      <div id="drooshi-time">You've drooshed for <span id="drooshi-time-display">0</span> seconds</div>
     </div>
     <div id="drooshi-select" style="display: none; ">
       <h1>SELECT YOUR DROOSHI!</h1>
