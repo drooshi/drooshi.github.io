@@ -1,285 +1,639 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="drooshi.tk">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>drooshi.tk</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"><link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600" rel="stylesheet" type="text/css">
     <style>
-      * {
-        box-sizing: border-box
-      }
-
       body {
         margin: 0;
-        padding: 8px;
-        text-align: center;
-        font-family: 'Lato', sans-serif;
-        font-size: 16px
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Lato', Arial, Helvetica, sans-serif;
       }
-
-      body.nc {
-        background-color: #000
-      }
-
-      body.nc #drooshi-mt {
-        color: #fff;
-      }
-
-      h1 {
-        margin-top: 0;
-        font-weight: 300;
-        font-size: 3em;
-      }
-
-      #drooshi-select-link {
-        display: inline-block;
-        margin-top: 18px;
-        color: #00e;
-        text-decoration: underline
-      }
-
-      #drooshi-select-link:visited {
-        color: #551a8b
-      }
-
       a {
-        text-decoration: none
+        color: #474747;
       }
-
-      #drooshi-box {
-        padding: 0 40px;
-        display: inline-block;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 400;
       }
-
-      #drooshi {
+      .drooshi-main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        padding: 0 0 1em;
+        min-height: 240px;
+        text-align: center;
+      }
+      .drooshi-heading {
+        font-weight: 400;
+        font-size: 3rem;
+        margin: 0.5rem 0 0
+      }
+      .drooshi-select-link {
+        font-size: 1.1rem;
+      }
+      .drooshi-box {
+        flex-grow: 1;
+        padding: 0.5em;
+      }
+      .drooshi-box-inner {
+        height: 0;
+      }
+      .drooshi-img {
+        position: relative;
         will-change: transform;
       }
-
-      #drooshi-time {
-        font-size: 1.1em;
-        margin-top: 0.2em;
+      .drooshi-bottom {
+        padding: 0 0 0.5rem;
+        font-size: 1.1rem;
+      }
+      .drooshi-select-link-bottom {
+        display: none;
+      }
+      .drooshi-notice {
+        background-color: #f7f7f7;
+        padding: 1em 4em;
+      }
+      .drooshi-footer {
+        padding: 1.5em 4em;
+        background-color: #e7e7e7;
+      }
+      .footer-wordmark {
+        color: #474747;
+        font-weight: 400;
+        font-size: 1.8rem;
       }
 
-      body.nc #drooshi-time {
+      .autoplay-overlay {
+        display: table;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1;
+        transition: opacity 0.2s;
+      }
+
+      .autoplay-overlay-inner {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 4em;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .drooshi-selector {
+        text-align: center;
+      }
+
+      .drooshi-heading.drooshi-select-heading {
+        margin: 0.5rem 0 1rem;
+      }
+
+      .drooshi-list {
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 0 1.5em;
+      }
+
+      .drooshi-li {
+        margin: 0 0 1rem;
+        transition: background-color 0.2s;
+      }
+
+      .drooshi-li:hover {
+        background-color: #f7f7f7;
+      }
+
+      .drooshi-li-link {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .drooshi-li-left {
+        display: table-cell;
+        width: 30%;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .drooshi-li-inner {
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .drooshi-li-drooshi {
+        width: 80%;
+      }
+
+      .drooshi-li-flag {
+        width: 35%;
+        position: absolute;
+        top: 68%;
+        left: 3%;
+      }
+
+      .drooshi-li-right {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 3.5rem;
+        font-weight: 600;
+      }
+
+      @media (max-width: 600px) {
+        .drooshi-heading {
+          font-size: 2rem;
+        }
+        .drooshi-li-left {
+          width: 35%
+        }
+        .drooshi-li-right {
+          font-size: 2.5em;
+        }
+      }
+
+      .drooshi-main.nightcore {
+        background: #000;
         color: #fff;
       }
 
-      .drooshi-options {
-        width: 640px;
-        height: 254px;
-        display: table;
-        margin: 4px auto
+      .drooshi-main.nightcore a {
+        color: #fff;
       }
 
-      .drooshi-options.nc-bg {
-        background: url(assets/nc-bg.jpg);
-        background-size: cover
+      @media (max-width: 480px) {
+        .autoplay-overlay-inner {
+          font-size: 2.5rem;
+        }
       }
 
-      .drooshi-opt {
-        width: 50%;
-        height: 100%;
-        display: table-cell
+      @media (max-width: 400px) {
+        .drooshi-heading {
+          font-size: 1.8rem;
+        }
+        .drooshi-notice,
+        .drooshi-footer {
+          padding: 0.4em 0.8em;
+        }
+        .drooshi-list {
+          padding: 0.8em
+        }
+        .drooshi-li-left {
+          width: 45%;
+        }
+        .drooshi-li-right {
+          font-size: 1.6rem;
+        }
+        .footer-info {
+          font-size: 0.8rem;
+        }
       }
 
-      .drooshi-opt.drooshi {
-        text-align: left;
-        position: relative
+      @media (max-width: 340px) {
+        .drooshi-heading {
+          font-size: 1.6rem;
+        }
       }
 
-      .drooshi-select-img {
-        height: 246px;
-        margin-top: 4px
-      }
-
-      .drooshi-select-flag {
-        position: absolute;
-        width: 100px
-      }
-
-      .drooshi-select-flag.romanian {
-        top: 170px;
-        left: 20px
-      }
-
-      .drooshi-select-flag.english {
-        top: 180px;
-        left: 20px
-      }
-
-      .drooshi-opt.caption {
-        color: #000;
-        font-size: 56px;
-        vertical-align: middle;
-        font-weight: 700
-      }
-
-      #play-button {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        top: 0;
-        left: 0;
-        vertical-align: middle;
-        margin: 0 auto;
-
-      }
-
-      #play-inner {
-        display: table-cell;
-        vertical-align: middle;
-        width: 100%;
-        height: 100%;
-      }
-
-      #music-play {
-        width: 160px;
-        max-width: 20%;
-
+      @media (min-width: 450px) and (max-height: 400px) {
+        .drooshi-select-link-top {
+          display: none;
+        }
+        .drooshi-select-link-bottom {
+          display: inline;
+        }
       }
     </style>
+  </head>
+  <body>
+    <div class="autoplay-overlay" style="display: none">
+      <div class="autoplay-overlay-inner">
+        Tap to play music
+      </div>
+    </div>
+    <div class="drooshi-main">
+      <div>
+        <h1 class="drooshi-heading">NUMA DROOSHI!!!</h1>
+        <a class="drooshi-select-link drooshi-select-link-top" href="#">Select your drooshi</a>
+      </div>
+      <div class="drooshi-box">
+        <div class="drooshi-box-inner">
+          <img class="drooshi-img" src="/assets/img/drooshi.png" alt="drooshi">
+        </div>
+      </div>
+      <div class="drooshi-bottom">
+        <span>You've drooshed for <span class="timer-time">0.0</span> s</span>
+        <span class="drooshi-select-link-bottom">
+          -
+          <a class="drooshi-select-link" href="#">Select your drooshi</a>
+        </span>
+      </div>
+    </div>
+    <div class="drooshi-selector">
+      <div>
+        <h1 class="drooshi-heading drooshi-select-heading">SELECT YOUR DROOSHI!</h1>
+      </div>
+      <div class="drooshi-list">
+      </div>
+    </div>
+    <div class="drooshi-notice">
+      <div>
+        <h2>Drooshi.tk version 4 now live!</h2>
+        <p>Drooshi.tk 4.x is a complete rewrite of drooshi.tk. It brings an immersive Drooshi experience to all devices.</p>
+        <p>To create an improved user experience, only the latest few versions of each major browser are supported in Drooshi.tk 4.0 and above. If you are using an older browser, please consider updating to the most recent version.</p>
+      </div>
+    </div>
+    <div class="drooshi-footer">
+      <h2 class="footer-wordmark">drooshi<span style="color: #777; font-weight: 300">.tk</span></h2>
+      <p class="footer-info">Drooshi.tk 2017. Version 4.0.0alpha-2</p>
+    </div>
     <script>
-      //Google analytics
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (function(global){
+        let Drooshi = {};
 
-      ga('create', 'UA-64077979-1', 'auto');
-      ga('send', 'pageview');
-
-      addEventListener("DOMContentLoaded", function () {
-        var getElementById = function(e){
-          return document.getElementById(e);
+        function getByClassAll(className) {
+          return Array.from(document.getElementsByClassName(className));
         }
 
-        var mainTitle = getElementById("drooshi-mt");
-        var drooshiOpts = document.getElementsByClassName("drooshi-options");
-        var body = getElementById("body");
-        var selectDrooshiLink = getElementById("drooshi-select-link");
-        var music = getElementById("drooshi-music");
-        var drooshiContainer = getElementById("drooshi-container");
-        var drooshiSelect = getElementById("drooshi-select");
-        var drooshi = getElementById("drooshi");
-        var drooshiTimeDisplay = getElementById("drooshi-time-display");
-
-        var drooshiIsMoving = true;
-        var drooshiStartTime = Date.now(); /*Used for drooshi timer*/
-
-        var defaultState = function (titleText, musicUrl) {
-          mainTitle.textContent = titleText;
-          music.src = musicUrl;
-          music.play();
-          drooshiContainer.style.display = "block";
-          drooshiSelect.style.display = "none";
-          drooshiIsMoving = true;
-          drooshiStartTime = Date.now();
-          ga("send", "event", "drooshi", "select", "choose drooshi", s);
-
+        function getByClass(className) {
+          return document.getElementsByClassName(className)[0];
         }
 
-        drooshiOpts[0].addEventListener("click", function () {
-          defaultState("NUMA DROOSHI!!!", "assets/romanian.mp3", 0);
-        });
-
-        drooshiOpts[1].addEventListener("click", function () {
-          defaultState("ENGLISH DROOSHI!!!", "assets/english.mp3", 1);
-        });
-
-        drooshiOpts[2].addEventListener("click", function () {
-          body.classList.add("nc");
-          defaultState("NIGHTCORE DROOSHI!!!", "assets/nightcore.mp3", 2);
-        });
-
-
-        var drooshify = function (img, scale, timing, offset) {
-          offset = offset ? offset : 0;
-          var i = 0, j = 0, sequence = [1, 1, 1, 1, 0, -1, -1, 1, -1];
-          var playButton = getElementById("play-button");
-          music.play();
-          if (music.paused) {
-            playButton.style.display = "table";
-            musicPlay = getElementById("music-play");
-            musicPlay.addEventListener("click", function(){
-              music.play();
-              playButton.remove();
-            })
-
-          } else {
-            playButton.remove();
+        function coerceNode(v) {
+          if (v instanceof Node) {
+            return v;
           }
-          var drooshiLastMoved = Date.now(); /*The last time the drooshi moved*/
+          else {
+            return new Text(v);
+          }
+        }
 
-          requestAnimationFrame(function moveDrooshi(){
-            if (drooshiIsMoving === true) {
-              var now = Date.now();
-              if ((now-drooshiLastMoved) >= 125) {
-                img.style.transform = img.style.webkitTransform = "translate(" + (j + offset).toString() + "px, 0px)";
-                i < sequence.length ? (j += sequence[i] * scale, i++) : (i = 0, j = 0);
-                drooshiLastMoved = Date.now() /*Reset current*/
-              }
-              drooshiTimeDisplay.textContent = ((now - drooshiStartTime)/1000).toFixed(1);
+        function createElement(name, attrs, children) {
+          let el = document.createElement(name);
+
+          // Shorthand for class
+          if (typeof attrs === 'string') {
+            attrs = {class: attrs};
+          }
+          Object.keys(attrs).forEach((attr) => {
+            if (attr.substr(0,2) === 'on') {
+              el.addEventListener(attr.substr(2).toLowerCase(), attrs[attr]);
             }
-            requestAnimationFrame(moveDrooshi);
+            else {
+              el.setAttribute(attr, attrs[attr]);
+            }
           });
+
+          if (children instanceof Array) {
+            children.forEach((child) => {
+              el.appendChild(coerceNode(child));
+            });
+          }
+          else {
+            el.appendChild(coerceNode(children));
+          }
+          return el;
+        }
+
+        // The main loop responsible for animations
+        class Loop {
+          constructor() {
+            this._listeners = [];
+            this.loop = this.loop.bind(this);
+            this.time = 0;
+            this.DELTA_TIME_CAP = 1000;
+            this.running = false;
+          }
+          loop() {
+            let time = this.time;
+            let absTime = Date.now();
+            let absDeltaTime = absTime - this.absLastFrameTime;
+            let deltaTime = Math.min(absDeltaTime < 0 ? 0 : absDeltaTime, this.DELTA_TIME_CAP);
+            time += deltaTime;
+
+            this._listeners.forEach(listener => listener(time, deltaTime));
+            this.af = requestAnimationFrame(this.loop);
+
+            this.absLastFrameTime = absTime;
+            this.time = time;
+          }
+          start() {
+            if (this.running) {
+              return;
+            }
+            if (!this.absLastFrameTime) {
+              this.absLastFrameTime = Date.now();
+            }
+            this.af = requestAnimationFrame(this.loop);
+            this.running = true;
+          }
+          stop() {
+            cancelAnimationFrame(this.af);
+            this.running = false;
+          }
+          subscribe(listener) {
+            let isSubscribed = true;
+            let listeners = this._listeners;
+            listeners.push(listener);
+
+            return function unsubscribe() {
+              if (!isSubscribed) {
+                return false;
+              }
+              listeners.splice(listeners.indexOf(listener), 1);
+            }
+          }
+        }
+        Drooshi.Loop = Loop;
+
+        // A general 2-dimensional vector
+        class Vector2 {
+          constructor(x, y) {
+            this.x = x;
+            this.y = y;
+          }
+
+          fitIn(outer) {
+            let inner = this;
+            let ratio = Math.min(outer.x / inner.x, outer.y / inner.y ,1);
+
+            if (isNaN(ratio)) {
+              return new Vector2(Math.min(outer.x, inner.x), Math.min(outer.y, inner.y))
+            }
+
+            return new Vector2(inner.x * ratio, inner.y * ratio);
+          }
+
+          scale(a) {
+            if (a instanceof Vector2) {
+              return new Vector2(this.x * a.x, this.y * a.y);
+            }
+            return new Vector2(this.x * a, this.y * a);
+          }
+        }
+        Drooshi.Vector2 = Vector2;
+
+        // Calculate the calculated size of the drooshiBox
+        Drooshi.calcdBoxInnerSize = function() {
+          let bounding = Drooshi.dBox.getBoundingClientRect();
+          return new Vector2(bounding.width - 2 * Drooshi.config.boxPadding,
+            bounding.height - 2 * Drooshi.config.boxPadding);
         };
 
-        selectDrooshiLink.addEventListener("click", function (ev) {
-          drooshiContainer.style.display = "none";
-          music.pause();
-          music.currentTime = 0;
-          drooshiSelect.style.display = "block";
-          body.classList.remove("nc");
-          drooshiIsMoving = false;
-        }, false);
+        Drooshi.fitDrooshi = function() {
+          let box = Drooshi.calcdBoxInnerSize();
+          let fit = Drooshi.config.drooshiSize.fitIn(box.scale(Drooshi.config.bounds));
 
-        drooshify(drooshi, 20, 125, -40);
-      }, false);
+          Drooshi.dImg.style.width = `${fit.x}px`;
+          Drooshi.dImg.style.top = `${(box.y - fit.y) / 2}px`;
+        };
+
+        Drooshi.createDrooshiOption = function(config) {
+          return createElement('div', 'drooshi-li',
+            createElement('a', {
+              href: '#',
+              onClick: (e) => {
+                e.preventDefault();
+                Drooshi.setDrooshi(config);
+              },
+              class: 'drooshi-li-link'
+              }, [
+              createElement('div', (()=>{
+                let attrs = {class: 'drooshi-li-left'};
+                if (config.iconStyle) {
+                  attrs.style = config.iconStyle;
+                }
+                return attrs;
+              })(),
+                createElement('div', 'drooshi-li-inner', (()=>{
+                  let drooshi = createElement('img', {
+                    class: 'drooshi-li-drooshi',
+                    src: Drooshi.config.drooshiSrc
+                  });
+                  if (config.flag) {
+                    return [drooshi, createElement('img', {
+                      class: 'drooshi-li-flag',
+                      src: config.flag,
+                      alt: 'Flag'
+                    })];
+                  }
+                  else {
+                    return [drooshi];
+                  }
+                })())
+              ),
+              createElement('div', 'drooshi-li-right', config.displayName)
+            ]));
+        };
+
+        Drooshi.Drooshify = function() {
+          sequence = Drooshi.config.moveSequence;
+          let dtSinceLastMove = -1;
+          let step = 0;
+          let amplitude = Drooshi.config.amplitude;
+
+          function move() {
+            Drooshi.dImg.style.transform = `translate(${sequence[step] * amplitude * 100}%, 0%)`;
+            step = ++step >= sequence.length ? 0 : step;
+          }
+
+          return function(t, dt) {
+            if (dtSinceLastMove === -1) {
+              move();
+              dtSinceLastMove = 0;
+            }
+            else if (dt > 125) {
+              move();
+              dtSinceLastMove = 0;
+            }
+            else if (dtSinceLastMove >= 125) {
+              move();
+              dtSinceLastMove = (dtSinceLastMove + dt) % 125;
+            }
+            else {
+              dtSinceLastMove += dt;
+            }
+          }
+        }
+
+        class DrooshTimer {
+          constructor() {
+            this.render = this.render.bind(this);
+            this.reset();
+          }
+          reset() {
+            this.startTime = Date.now();
+          }
+          render() {
+            Drooshi.dTime.textContent = ((Date.now() - this.startTime) / 1000).toFixed(1);
+          }
+        }
+        Drooshi.DrooshiTimer = DrooshTimer;
+
+        Drooshi.config = {
+          autoplayFadeTimeout: 200,
+          boxPadding: 8,
+          drooshiSize: new Vector2(813, 681),
+          bounds: new Vector2(0.9, 1),
+          moveSequence: [-3, -1, 1, 3, 3, 1, 3, 1, -1],
+          amplitude: 0.012,
+          drooshiSrc: '/assets/img/drooshi.png',
+          options: [
+            {
+              displayName: 'Original Romanian Drooshi',
+              heading: 'NUMA DROOSHI!!!',
+              audio: '/assets/music/romanian.mp3',
+              flag: '/assets/specific/flags/romanian-120px.png'
+            },
+            {
+              displayName: 'English Drooshi',
+              heading: 'ENGLISH DROOSHI!!!',
+              audio: '/assets/music/english.mp3',
+              flag: '/assets/specific/flags/english-120px.png'
+            },
+            {
+              displayName: 'Nightcore Drooshi',
+              heading: 'NIGHTCORE DROOSHI!!!',
+              audio: '/assets/music/nightcore.mp3',
+              iconStyle: 'background: url(/assets/specific/nightcore/bg.jpg); background-size: cover',
+              classes: ['nightcore']
+            }
+          ],
+          initialOption: 0
+        };
+
+        Drooshi.setAutoplay = function(status) {
+          localStorage.setItem('autoplay', !!status);
+        };
+
+        Drooshi.classes = [];
+
+        Drooshi.dMain = getByClass('drooshi-main');
+        Drooshi.dHeading = getByClass('drooshi-heading');
+        Drooshi.dBox = getByClass('drooshi-box');
+        Drooshi.dImg = getByClass('drooshi-img');
+        Drooshi.dTime = getByClass('timer-time');
+        Drooshi.dAutoplay = getByClass('autoplay-overlay');
+        Drooshi.dSelect = getByClass('drooshi-selector');
+        Drooshi.dList = getByClass('drooshi-list');
+        Drooshi.dSelectLinkL = getByClassAll('drooshi-select-link');
+
+        Drooshi.autoplay = !(localStorage.getItem('autoplay') === 'false');
+
+        Drooshi.showSelector = function() {
+          Drooshi.loop.stop();
+          Drooshi.dMain.style.display = 'none';
+          Drooshi.dSelect.style.display = '';
+        };
+
+        Drooshi.setDrooshi = function(option, initial) {
+          Drooshi.dHeading.textContent = option.heading;
+
+          let classes = option.classes || [];
+          Drooshi.classes = Drooshi.classes.filter(c => {
+            if (classes.indexOf(c) === -1) {
+              Drooshi.dMain.classList.remove(c);
+              return false;
+            }
+            return true;
+          });
+          classes.forEach(c => {
+            if (Drooshi.classes.indexOf(c) === -1) {
+              Drooshi.dMain.classList.add(c);
+              Drooshi.classes.push(c);
+            }
+          });
+
+          Drooshi.setMusic(option.audio, initial);
+          Drooshi.dSelect.style.display = 'none';
+          Drooshi.dMain.style.display = '';
+          Drooshi.loop.start();
+
+          Drooshi.currentOption = option;
+        }
+
+        Drooshi.setMusic = function(nextAudio, initial) {
+          if (initial || Drooshi.currentOption.audio !== nextAudio) {
+            if (Drooshi.audio) {
+              Drooshi.audio.src = nextAudio;
+            }
+            else {
+              Drooshi.audio = new Audio(nextAudio);
+              Drooshi.audio.loop = true;
+            }
+          }
+
+
+          if (!Drooshi.autoplay && initial) {
+            Drooshi.audio.pause();
+          }
+          else {
+            Drooshi.audio.play();
+          }
+
+          Drooshi.dAutoplay.addEventListener('click', function(){
+            Drooshi.autoplayOverlay.click();
+          });
+
+          // Mobile devices don't autoplay music, so we need to show a notice
+          if (Drooshi.audio.paused) {
+            Drooshi.autoplayOverlay.show();
+          }
+        }
+
+        Drooshi.autoplayOverlay = {
+          show: function() {
+            clearTimeout(Drooshi.autoplayOverlay.timeout);
+
+            // The opacity transition doesn't work here due to the browser batching
+            // layout and paint (we could force one with a forced reflow), but this
+            // doesn't really seem necessary here
+            Drooshi.dAutoplay.style.display = '';
+            Drooshi.dAutoplay.style.opacity = 1;
+          },
+          click: function() {
+            Drooshi.audio.play();
+            Drooshi.autoplayOverlay.hide();
+          },
+          hide: function() {
+            Drooshi.dAutoplay.style.opacity = 0;
+            Drooshi.autoplayOverlay.timeout = setTimeout(function() {
+              Drooshi.dAutoplay.style.display = 'none';
+            }, Drooshi.config.autoplayFadeTimeout);
+          }
+        };
+
+        Drooshi.config.options.forEach((option) => Drooshi.dList.appendChild(Drooshi.createDrooshiOption(option)));
+
+        Drooshi.dSelectLinkL.forEach((el) => el.addEventListener('click', Drooshi.showSelector));
+
+        Drooshi.currentOption = Drooshi.config.options[Drooshi.config.initialOption]
+
+        Drooshi.fitDrooshi();
+        window.addEventListener('resize', Drooshi.fitDrooshi);
+
+        Drooshi.loop = new Loop();
+        Drooshi.drooshTimer = new DrooshTimer();
+        Drooshi.loop.subscribe(Drooshi.Drooshify());
+        Drooshi.loop.subscribe(Drooshi.drooshTimer.render);
+
+        Drooshi.setDrooshi(Drooshi.currentOption, true);
+
+        window.Drooshi = Drooshi;
+      })(window);
     </script>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600" rel="stylesheet" type="text/css">
-  </head>
-  <body id="body">
-    <audio src="assets/romanian.mp3" id="drooshi-music" autoplay loop> Your browser does not support the MP3 format. Darn. </audio>
-    <div id="drooshi-container">
-      <h1 id="drooshi-mt">NUMA DROOSHI!!!</h1>
-      <a href="#" id="drooshi-select-link">Select your drooshi!</a>
-      <br>
-      <div id="drooshi-box">
-        <img src="assets/drooshi.png" alt="drooshi.tk" id="drooshi">
-      </div>
-      <div id="drooshi-time">You've drooshed for <span id="drooshi-time-display">0</span> seconds</div>
-    </div>
-    <div id="drooshi-select" style="display: none; ">
-      <h1>SELECT YOUR DROOSHI!</h1>
-      <a class="drooshi-options" href="#" id="dr-s-ro">
-        <div class="drooshi-opt drooshi">
-          <img src="assets/drooshi.png" alt="Drooshi" class="drooshi-select-img">
-          <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flag_of_Romania.svg/320px-Flag_of_Romania.svg.png" alt="Romanian" class="drooshi-select-flag romanian">
-        </div>
-        <div class="drooshi-opt caption">Original Romanian Drooshi</div>
-      </a>
-      <a class="drooshi-options" href="#" id="dr-s-en">
-        <div class="drooshi-opt drooshi">
-          <img src="assets/drooshi.png" alt="Drooshi" class="drooshi-select-img">
-          <img src="http://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/320px-Flag_of_the_United_Kingdom.svg.png" alt="Romanian" class="drooshi-select-flag english">
-        </div>
-        <div class="drooshi-opt caption">English Drooshi</div>
-      </a>
-      <a class="drooshi-options nc-bg" href="#" id="dr-s-nc">
-        <div class="drooshi-opt drooshi">
-          <img src="assets/drooshi.png" alt="Drooshi" class="drooshi-select-img">
-        </div>
-        <div class="drooshi-opt caption">Nightcore Drooshi</div>
-      </a>
-    </div>
-    <div id="play-button" style="display: none;">
-      <div id="play-inner">
-        <img src="assets/playbutton.svg" alt="Play" id="music-play">
-      </div>
-    </div>
   </body>
 </html>
