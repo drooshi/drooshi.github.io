@@ -279,6 +279,7 @@
     Drooshi.dSelect.style.display = 'none';
     Drooshi.dMain.style.display = '';
     Drooshi.loop.start();
+    Drooshi.fitDrooshi();
 
     Drooshi.currentOption = option;
   }
