@@ -14,7 +14,7 @@
       return v;
     }
     else {
-      return new Text(v);
+      return document.createTextNode(v);
     }
   }
 
