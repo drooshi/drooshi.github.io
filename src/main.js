@@ -1,8 +1,16 @@
 'use strict';
 
 (function(global){
+  function toArray(obj) {
+    var result = [];
+    for (var i = 0; i < (obj.length || 0); i++) {
+      result.push(obj[i]);
+    }
+    return result;
+  }
+
   function getByClassNameAll(className) {
-    return Array.from(document.getElementsByClassName(className));
+    return toArray(document.getElementsByClassName(className));
   }
 
   function getByClassName(className) {
