@@ -354,7 +354,7 @@
     options: [
       {
         displayName: 'Original Romanian Drooshi',
-        heading: 'NUMA DROOSHI!!!',
+        heading: '4 YEARS OF DROOSHI!!!',
         audio: '/assets/music/romanian.mp3',
         flag: '/assets/specific/flags/romanian-120px.png'
       },
