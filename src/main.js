@@ -79,7 +79,7 @@
   }
 
   Loop.prototype = {
-    constructor: 3,
+    constructor: Loop,
     loop: function() {
       var time = this.time;
       var absTime = Date.now();
@@ -354,7 +354,7 @@
     options: [
       {
         displayName: 'Original Romanian Drooshi',
-        heading: '4 YEARS OF DROOSHI!!!',
+        heading: 'NUMA DROOSHI!!!',
         audio: '/assets/music/romanian.mp3',
         flag: '/assets/specific/flags/romanian-120px.png'
       },

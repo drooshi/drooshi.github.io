@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #ffca28;
+  background-color: #fff;
   font-family: 'Lato', Arial, Helvetica, sans-serif;
 }
 a {
@@ -53,15 +53,10 @@ h6 {
 }
 .drooshi-footer {
   padding: 1.5em 4em;
-  background-color: #ffb300;
-}
-.footer-quote {
-  font-style: italic;
-  padding-left: 1em;
-  border-left: 4px solid #fb8c00;
+  background-color: #e7e7e7;
 }
 .footer-wordmark {
-  color: #2f2f2f;
+  color: #474747;
   font-weight: 400;
   font-size: 1.8rem;
 }
@@ -98,7 +93,7 @@ h6 {
   transition: background-color 0.2s;
 }
 .drooshi-li:hover {
-  background-color: #ffd863;
+  background-color: #f7f7f7;
 }
 .drooshi-li-link {
   display: block;
