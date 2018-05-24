@@ -52,6 +52,7 @@ if (doMinify) {
 fs.writeFileSync('index.html', template(html, {
   javascript: js,
   css: css,
+  year: new Date().getUTCFullYear().toString(),
   version: version
 }));
 
