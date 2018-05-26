@@ -1,9 +1,14 @@
+@font-face {
+  font-family: 'Px437_IBM_VGA8';
+  src: url('/assets/font/Px437_IBM_VGA8.woff2') format('woff2');
+}
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #fff;
-  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  font-family: 'Px437_IBM_VGA8', monospace;
+  font-size: 16px;
 }
 a {
   color: #474747;
@@ -27,11 +32,8 @@ h6 {
 }
 .drooshi-heading {
   font-weight: 400;
-  font-size: 3rem;
+  font-size: 48px;
   margin: 0.5rem 0 0
-}
-.drooshi-select-link {
-  font-size: 1.1rem;
 }
 .drooshi-box {
   flex-grow: 1;
@@ -43,10 +45,10 @@ h6 {
 .drooshi-img {
   position: relative;
   will-change: transform;
+  image-rendering: pixelated;
 }
 .drooshi-bottom {
   padding: 0 0 0.5rem;
-  font-size: 1.1rem;
 }
 .drooshi-select-link-bottom {
   display: none;
@@ -56,9 +58,12 @@ h6 {
   background-color: #e7e7e7;
 }
 .footer-wordmark {
-  color: #474747;
+  color: #3f3f3f;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 32px;
+}
+.footer-wordmark-tk {
+  color: #676767;
 }
 .autoplay-overlay {
   display: table;
@@ -72,13 +77,14 @@ h6 {
 }
 .autoplay-overlay-inner {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 4em;
+  font-size: 64px;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
 .drooshi-selector {
   text-align: center;
+  min-height: 90vh;
 }
 .drooshi-heading.drooshi-select-heading {
   margin: 0.5rem 0 1rem;
@@ -123,7 +129,7 @@ h6 {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  font-size: 3.5rem;
+  font-size: 48px;
   font-weight: 600;
 }
 @media (max-width: 600px) {

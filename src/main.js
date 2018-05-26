@@ -346,32 +346,16 @@
   Drooshi.config = {
     autoplayFadeTimeout: 200,
     boxPadding: 8,
-    drooshiSize: new Vector2(813, 681),
+    drooshiSize: new Vector2(836, 682),
     bounds: new Vector2(0.9, 1),
     moveSequence: [-3, -1, 1, 3, 3, 1, 3, 1, -1],
     amplitude: 0.012,
-    drooshiSrc: '/assets/img/drooshi.png',
-    options: [
-      {
-        displayName: 'Original Romanian Drooshi',
+    drooshiSrc: '/assets/img/pixel-drooshi.png',
+    options: [{
+        displayName: 'Pixel Drooshi',
         heading: 'NUMA DROOSHI!!!',
-        audio: '/assets/music/romanian.mp3',
-        flag: '/assets/specific/flags/romanian-120px.png'
-      },
-      {
-        displayName: 'English Drooshi',
-        heading: 'ENGLISH DROOSHI!!!',
-        audio: '/assets/music/english.mp3',
-        flag: '/assets/specific/flags/english-120px.png'
-      },
-      {
-        displayName: 'Nightcore Drooshi',
-        heading: 'NIGHTCORE DROOSHI!!!',
-        audio: '/assets/music/nightcore.mp3',
-        iconStyle: 'background: url(/assets/specific/nightcore/bg.jpg); background-size: cover',
-        classes: ['nightcore']
-      }
-    ],
+        audio: '/assets/music/romanian.mp3'
+      }],
     initialOption: 0
   };
 
