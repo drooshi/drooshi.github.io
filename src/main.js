@@ -211,6 +211,7 @@
     var dtSinceLastMove = -1;
     var step = 0;
     var amplitude = Drooshi.config.amplitude;
+    var timeStep = Drooshi.config.timeStep;
 
     function move() {
       Drooshi.dImg.style.transform = 'translate(' + sequence[step] * amplitude * 100 + '%, 0%)';
@@ -222,13 +223,13 @@
         move();
         dtSinceLastMove = 0;
       }
-      else if (dt > 125) {
+      else if (dt > timeStep) {
         move();
         dtSinceLastMove = 0;
       }
-      else if (dtSinceLastMove >= 125) {
+      else if (dtSinceLastMove >= timeStep) {
         move();
-        dtSinceLastMove = (dtSinceLastMove + dt) % 125;
+        dtSinceLastMove = (dtSinceLastMove + dt) % timeStep;
       }
       else {
         dtSinceLastMove += dt;
@@ -350,6 +351,7 @@
     bounds: new Vector2(0.9, 1),
     moveSequence: [-3, -1, 1, 3, 3, 1, 3, 1, -1],
     amplitude: 0.012,
+    timeStep: 125,
     drooshiSrc: '/assets/img/drooshi.png',
     options: [
       {
