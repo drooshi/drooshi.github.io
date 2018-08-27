@@ -143,12 +143,22 @@ h6 {
     font-size: 2.5rem;
   }
 }
-.drooshi-main.nightcore {
+body.nightcore .drooshi-main {
   background: #000;
   color: #fff;
 }
-.drooshi-main.nightcore a {
+body.nightcore .drooshi-main a {
   color: #fff;
+}
+body.nightcore .drooshi-footer {
+  background-color: #171717;
+  color: #fff;
+}
+body.nightcore .footer-wordmark {
+  color: #fff;
+}
+body.nightcore .footer-wordmark-tk {
+  color: #c7c7c7;
 }
 @media (max-width: 480px) {
   .autoplay-overlay-inner {

@@ -17,6 +17,10 @@
     return document.getElementsByClassName(className)[0];
   }
 
+  function getByTagName(tagName) {
+    return document.getElementsByTagName(tagName)[0];
+  }
+
   function toNode(v) {
     if (v instanceof Node) {
       return v;
@@ -28,6 +32,7 @@
 
   var Drooshi = {};
 
+  Drooshi.dBody = getByTagName('body');
   Drooshi.dMain = getByClassName('drooshi-main');
   Drooshi.dHeading = getByClassName('drooshi-heading');
   Drooshi.dBox = getByClassName('drooshi-box');
@@ -258,8 +263,25 @@
     localStorage.setItem('autoplay', !!status);
   };
 
+  function changeClasses(classList) {
+    Drooshi.classes = Drooshi.classes.filter(function(c) {
+      if (classList.indexOf(c) === -1) {
+        Drooshi.dBody.classList.remove(c);
+        return false;
+      }
+      return true;
+    });
+    classList.forEach(function(c) {
+      if (Drooshi.classes.indexOf(c) === -1) {
+        Drooshi.dBody.classList.add(c);
+        Drooshi.classes.push(c);
+      }
+    });
+  }
+
   Drooshi.showSelector = function(ev) {
     ev.preventDefault();
+    changeClasses([]);
 
     Drooshi.loop.stop();
     Drooshi.dMain.style.display = 'none';
@@ -270,19 +292,7 @@
     Drooshi.dHeading.textContent = option.heading;
 
     var classes = option.classes || [];
-    Drooshi.classes = Drooshi.classes.filter(function(c) {
-      if (classes.indexOf(c) === -1) {
-        Drooshi.dMain.classList.remove(c);
-        return false;
-      }
-      return true;
-    });
-    classes.forEach(function(c) {
-      if (Drooshi.classes.indexOf(c) === -1) {
-        Drooshi.dMain.classList.add(c);
-        Drooshi.classes.push(c);
-      }
-    });
+    changeClasses(classes);
 
     Drooshi.setMusic(option.audio, initial);
     Drooshi.dSelect.style.display = 'none';
