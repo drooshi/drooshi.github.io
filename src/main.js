@@ -17,6 +17,10 @@
     return document.getElementsByClassName(className)[0];
   }
 
+  function getByTagName(tagName) {
+    return document.getElementsByTagName(tagName)[0];
+  }
+
   function toNode(v) {
     if (v instanceof Node) {
       return v;
@@ -28,6 +32,7 @@
 
   var Drooshi = {};
 
+  Drooshi.dBody = getByTagName('body');
   Drooshi.dMain = getByClassName('drooshi-main');
   Drooshi.dHeading = getByClassName('drooshi-heading');
   Drooshi.dBox = getByClassName('drooshi-box');
@@ -211,6 +216,7 @@
     var dtSinceLastMove = -1;
     var step = 0;
     var amplitude = Drooshi.config.amplitude;
+    var timeStep = Drooshi.config.timeStep;
 
     function move() {
       Drooshi.dImg.style.transform = 'translate(' + sequence[step] * amplitude * 100 + '%, 0%)';
@@ -222,13 +228,13 @@
         move();
         dtSinceLastMove = 0;
       }
-      else if (dt > 125) {
+      else if (dt > timeStep) {
         move();
         dtSinceLastMove = 0;
       }
-      else if (dtSinceLastMove >= 125) {
+      else if (dtSinceLastMove >= timeStep) {
         move();
-        dtSinceLastMove = (dtSinceLastMove + dt) % 125;
+        dtSinceLastMove = (dtSinceLastMove + dt) % timeStep;
       }
       else {
         dtSinceLastMove += dt;
@@ -257,8 +263,25 @@
     localStorage.setItem('autoplay', !!status);
   };
 
+  function changeClasses(classList) {
+    Drooshi.classes = Drooshi.classes.filter(function(c) {
+      if (classList.indexOf(c) === -1) {
+        Drooshi.dBody.classList.remove(c);
+        return false;
+      }
+      return true;
+    });
+    classList.forEach(function(c) {
+      if (Drooshi.classes.indexOf(c) === -1) {
+        Drooshi.dBody.classList.add(c);
+        Drooshi.classes.push(c);
+      }
+    });
+  }
+
   Drooshi.showSelector = function(ev) {
     ev.preventDefault();
+    changeClasses([]);
 
     Drooshi.loop.stop();
     Drooshi.dMain.style.display = 'none';
@@ -269,19 +292,7 @@
     Drooshi.dHeading.textContent = option.heading;
 
     var classes = option.classes || [];
-    Drooshi.classes = Drooshi.classes.filter(function(c) {
-      if (classes.indexOf(c) === -1) {
-        Drooshi.dMain.classList.remove(c);
-        return false;
-      }
-      return true;
-    });
-    classes.forEach(function(c) {
-      if (Drooshi.classes.indexOf(c) === -1) {
-        Drooshi.dMain.classList.add(c);
-        Drooshi.classes.push(c);
-      }
-    });
+    changeClasses(classes);
 
     Drooshi.setMusic(option.audio, initial);
     Drooshi.dSelect.style.display = 'none';
@@ -346,16 +357,33 @@
   Drooshi.config = {
     autoplayFadeTimeout: 200,
     boxPadding: 8,
-    drooshiSize: new Vector2(836, 682),
+    drooshiSize: new Vector2(813, 681),
     bounds: new Vector2(0.9, 1),
     moveSequence: [-3, -1, 1, 3, 3, 1, 3, 1, -1],
     amplitude: 0.012,
-    drooshiSrc: '/assets/img/pixel-drooshi.png',
-    options: [{
-        displayName: 'Pixel Drooshi',
+    timeStep: 125,
+    drooshiSrc: '/assets/img/drooshi.png',
+    options: [
+      {
+        displayName: 'Original Romanian Drooshi',
         heading: 'NUMA DROOSHI!!!',
-        audio: '/assets/music/romanian.mp3'
-      }],
+        audio: '/assets/music/romanian.mp3',
+        flag: '/assets/specific/flags/romanian-120px.png'
+      },
+      {
+        displayName: 'English Drooshi',
+        heading: 'ENGLISH DROOSHI!!!',
+        audio: '/assets/music/english.mp3',
+        flag: '/assets/specific/flags/english-120px.png'
+      },
+      {
+        displayName: 'Nightcore Drooshi',
+        heading: 'NIGHTCORE DROOSHI!!!',
+        audio: '/assets/music/nightcore.mp3',
+        iconStyle: 'background: url(/assets/specific/nightcore/bg.jpg); background-size: cover',
+        classes: ['nightcore']
+      }
+    ],
     initialOption: 0
   };
 

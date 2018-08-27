@@ -1,14 +1,9 @@
-@font-face {
-  font-family: 'Px437_IBM_VGA8';
-  src: url('/assets/font/Px437_IBM_VGA8.woff2') format('woff2');
-}
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #fff;
-  font-family: 'Px437_IBM_VGA8', monospace;
-  font-size: 16px;
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
 }
 a {
   color: #474747;
@@ -26,18 +21,21 @@ h6 {
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  padding: 0 0 1em;
+  padding: 0 0 1rem;
   min-height: 240px;
   text-align: center;
 }
 .drooshi-heading {
   font-weight: 400;
-  font-size: 48px;
+  font-size: 3rem;
   margin: 0.5rem 0 0
+}
+.drooshi-select-link {
+  font-size: 1.1rem;
 }
 .drooshi-box {
   flex-grow: 1;
-  padding: 0.5em;
+  padding: 0.5rem;
 }
 .drooshi-box-inner {
   height: 0;
@@ -45,25 +43,31 @@ h6 {
 .drooshi-img {
   position: relative;
   will-change: transform;
-  image-rendering: pixelated;
 }
 .drooshi-bottom {
   padding: 0 0 0.5rem;
+  font-size: 1.1rem;
 }
 .drooshi-select-link-bottom {
   display: none;
 }
+.drooshi-notice,
 .drooshi-footer {
-  padding: 1.5em 4em;
+  padding: 1.5rem 4rem;
+}
+.drooshi-notice {
+  background-color: #f7f7f7;
+}
+.drooshi-footer {
   background-color: #e7e7e7;
 }
 .footer-wordmark {
-  color: #3f3f3f;
+  color: #272727;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 1.8rem;
 }
 .footer-wordmark-tk {
-  color: #676767;
+  color: #777777;
 }
 .autoplay-overlay {
   display: table;
@@ -77,22 +81,24 @@ h6 {
 }
 .autoplay-overlay-inner {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 64px;
+  font-size: 4rem;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
 .drooshi-selector {
   text-align: center;
-  min-height: 90vh;
+  padding: 0.5rem 0 0;
+  min-height: 100vh;
+  padding: 0 0 1rem;
 }
 .drooshi-heading.drooshi-select-heading {
-  margin: 0.5rem 0 1rem;
+  margin: 0 0 1rem;
 }
 .drooshi-list {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 1.5em;
+  padding: 0 1.5rem;
 }
 .drooshi-li {
   margin: 0 0 1rem;
@@ -129,8 +135,8 @@ h6 {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  font-size: 48px;
-  font-weight: 600;
+  font-size: 3.5rem;
+  font-weight: 700;
 }
 @media (max-width: 600px) {
   .drooshi-heading {
@@ -140,15 +146,29 @@ h6 {
     width: 35%
   }
   .drooshi-li-right {
-    font-size: 2.5em;
+    font-size: 2.5rem;
   }
 }
-.drooshi-main.nightcore {
+body.nightcore .drooshi-main {
   background: #000;
   color: #fff;
 }
-.drooshi-main.nightcore a {
+body.nightcore .drooshi-main a {
   color: #fff;
+}
+body.nightcore .drooshi-notice {
+  background-color: #0f0f0f;
+  color: #fff;
+}
+body.nightcore .drooshi-footer {
+  background-color: #171717;
+  color: #fff;
+}
+body.nightcore .footer-wordmark {
+  color: #fff;
+}
+body.nightcore .footer-wordmark-tk {
+  color: #c7c7c7;
 }
 @media (max-width: 480px) {
   .autoplay-overlay-inner {
@@ -159,11 +179,12 @@ h6 {
   .drooshi-heading {
     font-size: 1.8rem;
   }
+  .drooshi-notice,
   .drooshi-footer {
-    padding: 0.4em 0.8em;
+    padding: 0.4rem 0.8rem;
   }
   .drooshi-list {
-    padding: 0.8em
+    padding: 0.8rem
   }
   .drooshi-li-left {
     width: 45%;

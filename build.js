@@ -70,7 +70,7 @@ function tokenize(str, keys) {
   let index = 0;
   let length = str.length;
 
-  let re = /\{\{@|\}\}/g;
+  let re = /#\{|\}/g;
 
   for (;;) {
     if (index >= length) {
@@ -90,10 +90,10 @@ function tokenize(str, keys) {
     }
     if (nextMP === index) {
       let nextT = nextM[0];
-      if (nextT === '{{@') {
+      if (nextT === '#{') {
         tokens.push(token('t_bl', nextT, index));
       }
-      else if (nextT === '}}') {
+      else if (nextT === '}') {
         tokens.push(token('t_br', nextT, index));
       }
       index += nextT.length;
@@ -122,7 +122,7 @@ function createTree(tokens) {
 
     if (t.type === 't_bl') {
       if (inTbl) {
-        throw new SyntaxError('Illegal nested {{@ at position ' + index);
+        throw new SyntaxError('Illegal nested #{ at position ' + index);
       }
       lastTBl = t;
       inTbl = true;
@@ -149,7 +149,7 @@ function createTree(tokens) {
   }
 
   if (inTbl) {
-    throw new SyntaxError('Unclosed {{@ at position at end of input');
+    throw new SyntaxError('Unclosed #{ at position at end of input');
   }
 
   return tree;
