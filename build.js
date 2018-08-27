@@ -149,7 +149,7 @@ function createTree(tokens) {
   }
 
   if (inTbl) {
-    throw new SyntaxError('Unclosed {{@ at position at end of input');
+    throw new SyntaxError('Unclosed #{ at position at end of input');
   }
 
   return tree;
