@@ -51,8 +51,14 @@ h6 {
 .drooshi-select-link-bottom {
   display: none;
 }
+.drooshi-notice,
 .drooshi-footer {
   padding: 1.5rem 4rem;
+}
+.drooshi-notice {
+  background-color: #f7f7f7;
+}
+.drooshi-footer {
   background-color: #e7e7e7;
 }
 .footer-wordmark {
@@ -150,6 +156,10 @@ body.nightcore .drooshi-main {
 body.nightcore .drooshi-main a {
   color: #fff;
 }
+body.nightcore .drooshi-notice {
+  background-color: #0f0f0f;
+  color: #fff;
+}
 body.nightcore .drooshi-footer {
   background-color: #171717;
   color: #fff;
@@ -169,6 +179,7 @@ body.nightcore .footer-wordmark-tk {
   .drooshi-heading {
     font-size: 1.8rem;
   }
+  .drooshi-notice,
   .drooshi-footer {
     padding: 0.4rem 0.8rem;
   }
