@@ -7,7 +7,7 @@
   "author": "Shroomy Shroom <sporeventexplosion@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "clean-css": "^4.1.9",
+    "clean-css": "^4.1.11",
     "commander": "^2.11.0",
     "html-minifier": "^3.5.6",
     "uglify-es": "^3.1.3"
