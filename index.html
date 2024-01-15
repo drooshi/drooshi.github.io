@@ -10,12 +10,20 @@ NUMA DROOSHI!
   <source src="/assets/music/romanian.mp3" type="audio/mpeg">
   Your browser does not support the MP3 format. Darn.
 </audio>
-<h1>
+<h1 id="title">
 10 YEARS OF DROOSHI!!!
 </h1>
 <div id="playprompt">Click anywhere to play music</div>
 <img src="/reconstructed/drooshi.gif">
 </center>
-<script>var playing=false;document.addEventListener("click",function(){if(playing)return;playing=true;document.getElementById("music").play();document.getElementById("playprompt").style.display="none";});</script>
+<script>
+var playing=false;
+document.addEventListener("click",function(){if(playing)return;playing=true;document.getElementById("music").play();document.getElementById("playprompt").style.display="none";});
+var useorigtitle=false;
+var origtitle="NUMA DROOSHI!!!";
+var yearstitle="10 YEARS OF DROOSHI!!!";
+var title=document.getElementById("title");
+title.addEventListener("click",function(){useorigtitle=!useorigtitle;title.textContent=useorigtitle?origtitle:yearstitle;});
+</script>
 </body>
 </html>
